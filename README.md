@@ -30,3 +30,14 @@ cd myflaskapp  # Replace with the actual directory name of the cloned repository
 - docker build -t myflaskapp .
 - docker run -e OPENWEATHERMAP_API_KEY=you_api_key -p 5000:5000 myflaskapp
 - or pusblish docker image so people can use it directly
+
+# online docker image
+- create a repositry at --> <https://hub.docker.com/repositories/usman547>
+- tag your local image with docker username and repositry name
+- `docker tag local-image-name usman547/repo-name` --> this will point the image using pointer
+- `docker push new-image-name-that-has-docker-username`
+
+# docker compose
+- It can be used to run multiple containers and can be set to which ports to expose
+- and can set environemnt variables. 
+- just run `docker compose up` in directory where we docker-compose.yml and do edit env variable in it.
