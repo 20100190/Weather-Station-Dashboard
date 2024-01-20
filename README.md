@@ -7,8 +7,9 @@
 /Weather-Station-Dashboard
 │
 ├── app.py         # Your main Flask application file
-├── requirements.txt   # All required Python packages
+├── requirements.txt    # All required Python packages
 ├── Dockerfile     # Instructions for building the Docker image
+├── docker-compose.yml  # all instruction to run which container and port exposing just check environmnet section before run
 ├── .dockerignore  # (Optional) Exclude files from Docker build context
 └── /templates     # (Optional) Folder for Jinja2 templates
     └── index.html 
