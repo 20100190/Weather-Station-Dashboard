@@ -1,0 +1,8 @@
+version: '3.8'
+services:
+  flask_web:
+    image: usman547/first_docker_image
+    ports:
+      - "5000:5000"
+    environment:
+      - OPENWEATHERMAP_API_KEY=18f0b7f80970aa2219eb77591cbd1c33

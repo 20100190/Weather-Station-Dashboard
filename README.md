@@ -11,7 +11,7 @@
 ├── Dockerfile     # Instructions for building the Docker image
 ├── .dockerignore  # (Optional) Exclude files from Docker build context
 └── /templates     # (Optional) Folder for Jinja2 templates
-    └── index.html
+    └── index.html 
 
 
 - How to run?
@@ -22,10 +22,11 @@ cd myflaskapp  # Replace with the actual directory name of the cloned repository
 - python -m venv venv --> Create and activate a virtual environment (Windows)
 - venv\Scripts\activate
 - pip install -r requirements.txt --> Install dependencies
+- create .env file to populate your key, in docker that can be passed as cmd argument or you can pass it
 - set FLASK_APP=app.py  # Or whichever file contains your Flask app
 - flask run --> # Run the Flask app
 
 # with docker --> create named image and then run a container using named image.
 - docker build -t myflaskapp .
-- docker run -p 5000:5000 myflaskapp
+- docker run -e OPENWEATHERMAP_API_KEY=you_api_key -p 5000:5000 myflaskapp
 - or pusblish docker image so people can use it directly
