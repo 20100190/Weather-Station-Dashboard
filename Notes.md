@@ -25,3 +25,10 @@
 ## Peak in container
 - `docker exec -it <container_name_or_id> bash` --> will open a bash terminal. It's same as windows cmd as python base image I am using python:3.8-slim that's linux based image so bash will open. ls to list all files. 
 
+## commands
+`docker build -t self_image_name .`
+`docker run -d -p 8000:8000 my_image`  --> run container, -d/-it
+`docker run -it -p 8888:8888 tensorflow/tensorflow:latest-jupyter`
+`docker exec -it <container_name> bash` --> run a bash terminal
+`docker pull tensorflow/tensorflow:latest` --> pull image manually or run command will pull if not found
+

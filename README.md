@@ -4,16 +4,17 @@
 # .env
 - OPENWEATHERMAP_API_KEY = "your_api_key"
 
-/Weather-Station-Dashboard
+```plaintext
+Weather-Station-Dashboard
 │
-├── app.py         # Your main Flask application file
-├── requirements.txt    # All required Python packages
-├── Dockerfile     # Instructions for building the Docker image
-├── docker-compose.yml  # all instruction to run which container and port exposing just check environmnet section before run
-├── .dockerignore  # (Optional) Exclude files from Docker build context
-└── /templates     # (Optional) Folder for Jinja2 templates
+├── app.py                  # Your main Flask application file
+├── requirements.txt        # All required Python packages
+├── Dockerfile              # Instructions for building the Docker image
+├── docker-compose.yml      # all instruction to run which container and port exposing just check environment section before run
+├── .dockerignore           # (Optional) Exclude files from Docker build context
+└── templates               # (Optional) Folder for Jinja2 templates
     └── index.html 
-
+```
 
 - How to run?
 git clone <URL-of-your-remote-repository>
@@ -28,6 +29,7 @@ cd myflaskapp  # Replace with the actual directory name of the cloned repository
 - flask run --> # Run the Flask app
 
 # with docker --> create named image and then run a container using named image.
+- -t is for tag .ie name of the image and . says looks in current directory for Dockerfile
 - docker build -t myflaskapp .
 - docker run -e OPENWEATHERMAP_API_KEY=you_api_key -p 5000:5000 myflaskapp
 - or pusblish docker image so people can use it directly
@@ -42,3 +44,4 @@ cd myflaskapp  # Replace with the actual directory name of the cloned repository
 - It can be used to run multiple containers and can be set to which ports to expose
 - and can set environemnt variables. 
 - just run `docker compose up` in directory where we docker-compose.yml and do edit env variable in it.
+- every github codespace somes with docker daemon running so you can run `docker compose up` after editing evironment section
