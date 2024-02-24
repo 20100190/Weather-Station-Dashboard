@@ -3,6 +3,7 @@
 - Load env using load_dotenv() to access environment variables, also include that file in .gitignore
 # .env
 - OPENWEATHERMAP_API_KEY = "your_api_key"
+- get your api key from <https://openweathermap.org/appid>
 
 ```plaintext
 Weather-Station-Dashboard
