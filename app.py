@@ -13,7 +13,6 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-
 @app.route('/weather/<city>', methods=['GET'])
 # city is a parameter, will be captured from url and passed to this function
 def get_weather(city):
