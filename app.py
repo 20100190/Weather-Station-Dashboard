@@ -1,31 +1,47 @@
-from flask import Flask, render_template, request, session
+from dotenv import load_dotenv
+import os
 import requests
+from flask import Flask, jsonify, render_template, request, session
+from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
+basedir = os.path.abspath(os.path.dirname(__file__))
 
-app = Flask(__name__)
-app.secret_key = "18f0b7f80970aa2219eb77591cbd1c33"
+db = SQLAlchemy()
 
-@app.route('/')
-def index():
-    return render_template('index.html')
+def create_app():
+    app = Flask(__name__)
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'app.db')    
 
-@app.route('/weather/<city>')
-def weather(city):
-    url = f'http://api.openweathermap.org/data/2.5/weather?q={city}&appid="18f0b7f80970aa2219eb77591cbd1c33"&units=metric'
-    response = requests.get(url)
-    data = response.json()
-    return data
+    db.init_app(app)
+    with app.app_context():
+        from models import BasicInfo
+        db.create_all()
 
-@app.route('/get_weather', methods=['POST'])
-def get_weather():
-    city = request.form['city']
-    weather_data = weather(city)
+    from models import BasicInfo
 
-    # Store queried cities in session
-    if 'cities' not in session:
-        session['cities'] = []
-    session['cities'].append(city)
+    @app.route('/')
+    def index():
+        return render_template('index.html')
 
-    return render_template('weather.html', weather_data=weather_data, cities=session['cities'])
+    @app.route('/weather/<city>')
+    def weather(city):
+        url = f'http://api.openweathermap.org/data/2.5/weather?q={city}&appid=18f0b7f80970aa2219eb77591cbd1c33&units=metric'
+        response = requests.get(url)
+        data = response.json()
+        basic_info = BasicInfo(time=datetime.now(), city=city, data=data)
+        db.session.add(basic_info)
+        db.session.commit()
+        return data
+
+    @app.route('/history')
+    def history():
+        '''Show all queruies from db
+        '''
+        pass
+
+    return app
 
 if __name__ == '__main__':
+    app = create_app()
+    db.create_all(app=app)
     app.run(debug=True)
