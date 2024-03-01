@@ -1,18 +1,53 @@
-<input type="text" id="cityInput" placeholder="Enter city name">
-<button id="getWeather">Get Weather</button>
-<div id='weatherResult'></div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        #loadingIndicator {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" id="cityInput" placeholder="Enter city name">
+                    <button class="btn btn-primary" id="getWeather">Get Weather</button>
+                    <button class="btn btn-secondary" id="clearWeather">Clear</button>
+                </div>
+                <div id="weatherResult"></div>
+                <div id="loadingIndicator" class="text-center mt-3">Loading...</div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#getWeather').click(function() {
+                var city = $('#cityInput').val();
+                $('#loadingIndicator').show();
+                $.get(`/weather/${city}`, function(data) {
+                    $('#weatherResult').html(`<p>Temperature: ${data.main.temp}°C</p>
+                                              <p>Description: ${data.weather[0].description}</p>
+                                              <p>Humidity: ${data.main.humidity}%</p>`);
+                }).fail(function() {
+                    $('#weatherResult').html('<p class="text-danger">Failed to fetch weather data. Please try again.</p>');
+                }).always(function() {
+                    $('#loadingIndicator').hide();
+                });
+            });
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-$(document).ready(function() {
-    $('#getWeather').click(function() {
-        var city = $('#cityInput').val();
-        console.log(city);
-        $.get(`/weather/${city}`, function(data) {
-            $('#weatherResult').html(`<p>Temperature: ${data.main.temp}°C</p>
-                                      <p>Description: ${data.weather[0].description}</p>
-                                      <p>Humidity: ${data.main.humidity}%</p>`);
+            $('#clearWeather').click(function() {
+                $('#weatherResult').html('');
+                $('#cityInput').val('');
+            });
         });
-    });
-});
-</script>
+    </script>
+</body>
+</html>
