@@ -35,7 +35,7 @@ def create_app():
 
     @app.route('/history')
     def history():
-        '''Show all queruies from db
+        '''Show all queruied results from db in a tabular format
         '''
         pass
 
