@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Information</title>
+</head>
+<body>
+    <h1>Weather Information</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>City Name</th>
+                <th>Temperature (°C)</th>
+                <th>Description</th>
+                <th>Humidity (%)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ weather_data.name }}</td>
+                <td>{{ weather_data.main.temp }}</td>
+                <td>{{ weather_data.weather[0].description }}</td>
+                <td>{{ weather_data.main.humidity }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Queried Cities</h2>
+    <ul>
+        {% for city in cities %}
+            <li>{{ city }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

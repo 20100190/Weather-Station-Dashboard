@@ -1,26 +1,47 @@
 from dotenv import load_dotenv
 import os
 import requests
-from flask import Flask, jsonify, render_template
+from flask import Flask, jsonify, render_template, request, session
+from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
+basedir = os.path.abspath(os.path.dirname(__file__))
 
-load_dotenv()  # take environment variables from .env file
-app = Flask(__name__)
+db = SQLAlchemy()
 
+def create_app():
+    app = Flask(__name__)
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'app.db')    
 
-@app.route('/', methods=['GET', 'POST'])
-# decorator when someone hit root/above url then following function
-# will handle that request
-def index():
-    return render_template('index.html')
+    db.init_app(app)
+    with app.app_context():
+        from models import BasicInfo
+        db.create_all()
 
+    from models import BasicInfo
 
-@app.route('/weather/<city>', methods=['GET'])
-# city is a parameter, will be captured from url and passed to this function
-def get_weather(city):
-    api_key = os.getenv('OPENWEATHERMAP_API_KEY')
-    url = (
-        f"http://api.openweathermap.org/data/2.5/weather?q={city}"
-        f"&appid={api_key}&units=metric"
-    )
-    response = requests.get(url)
-    return jsonify(response.json())
+    @app.route('/')
+    def index():
+        return render_template('index.html')
+
+    @app.route('/weather/<city>')
+    def weather(city):
+        url = f'http://api.openweathermap.org/data/2.5/weather?q={city}&appid=18f0b7f80970aa2219eb77591cbd1c33&units=metric'
+        response = requests.get(url)
+        data = response.json()
+        basic_info = BasicInfo(time=datetime.now(), city=city, data=data)
+        db.session.add(basic_info)
+        db.session.commit()
+        return data
+
+    @app.route('/history')
+    def history():
+        '''Show all queruied results from db in a tabular format
+        '''
+        pass
+
+    return app
+
+if __name__ == '__main__':
+    app = create_app()
+    db.create_all(app=app)
+    app.run(debug=True)
