@@ -1,4 +1,4 @@
 .env
+app.db
 flask_env
-venv/
 __pycache__/

@@ -1,17 +1,19 @@
 import os
 from dotenv import load_dotenv
 
-from flask import Blueprint, jsonify, render_template, request
+from flask import jsonify, render_template
 import requests
-from .models import Search
-from . import db
+from app.models import Search  # if it were a modul then we do not need app
+from app import db
+from . import main
 
-main = Blueprint('main', __name__)
 load_dotenv()
+
 
 @main.route('/')
 def index():
     return render_template('main/index.html')
+
 
 @main.route('/weather/<city>')
 def weather(city):
@@ -27,6 +29,7 @@ def weather(city):
         db.session.add(basic_info)
         db.session.commit()
     return jsonify(data)
+
 
 @main.route('/history')
 def history():
