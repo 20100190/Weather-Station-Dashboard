@@ -14,9 +14,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 EXPOSE 5000
 
 # Define environment variable
-ENV FLASK_APP=app.py
+ENV FLASK_APP=run.py
 ENV FLASK_RUN_HOST=0.0.0.0  
 # Listen on all public IPs, so app can be accessible from outside the container as well
 
-# Run app.py when the container launches 
+# Run run.py when the container launches 
 CMD ["flask", "run"]

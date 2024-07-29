@@ -1,48 +1,63 @@
 # Weather-Station-Dashboard
 
-- Load env using load_dotenv() to access environment variables, also include that file in .gitignore
+- Load env using load_dotenv() to access environment variables, 
+- make sure to include that file in .gitignore
 # .env
 - OPENWEATHERMAP_API_KEY = "your_api_key"
 - get your api key from <https://openweathermap.org/appid>
 
+# App Structure
 ```plaintext
 Weather-Station-Dashboard
+your_project/
 │
-├── app.py                  # Your main Flask application file
+├── app/
+│   ├── __init__.py
+│   ├── config.py
+│   ├── models.py
+│   ├── main/
+│   │   ├── __init__.py
+│   │   ├── views.py
+│   ├── other_blueprint/
+│   │   ├── __init__.py
+│   │   ├── views.py
+├── static/
+│   ├── css/
+│   │   ├── style.css
+│   ├── js/
+│   │   ├── script.js
+├── templates/
+│   ├── main/
+|   |   ├──index.html
+│   |   ├── weather.html
+│   ├── base.html
+├── .env
+├── run.py
 ├── requirements.txt        # All required Python packages
 ├── Dockerfile              # Instructions for building the Docker image
 ├── docker-compose.yml      # all instruction to run which container and port exposing just check environment section before run
 ├── .dockerignore           # (Optional) Exclude files from Docker build context
-└── templates               # (Optional) Folder for Jinja2 templates
-    └── index.html 
 ```
 
-- How to run?
-git clone <URL-of-your-remote-repository>
-cd myflaskapp  # Replace with the actual directory name of the cloned repository.
 
-# without docker --> create venv and install req.txt and run app
-- python -m venv venv --> Create and activate a virtual environment (Windows)
+# How to run?
+
+# Create .env file like below in root dir
+OPENWEATHERMAP_API_KEY=your_key
+
+# without docker 
+## create venv and install requirements.txt and run 'python run.py' in cmd
+Create and activate a virtual environment (Windows)
+- python -m venv venv
 - venv\Scripts\activate
 - pip install -r requirements.txt --> Install dependencies
-- create .env file to populate your key, in docker that can be passed as cmd argument or you can pass it
-- set FLASK_APP=app.py  # Or whichever file contains your Flask app
-- flask run --> # Run the Flask app
+- set FLASK_APP=run.py or simply python run.py in cmd
 
-# with docker --> create named image and then run a container using named image.
-- -t is for tag .ie name of the image and . says looks in current directory for Dockerfile
-- docker build -t myflaskapp .
-- docker run -e OPENWEATHERMAP_API_KEY=you_api_key -p 5000:5000 myflaskapp
-- or pusblish docker image so people can use it directly
+# with online docker image
+- docker compose up
+- docker run -it --env-file .env -p 5000:5000 usman547/weather-flask-app-repo
+- docker run -d -p 5000:5000 -e OPENWEATHERMAP_API_KEY=your_api_key_here usman547/weather-flask-app-repo
 
-# online docker image
-- create a repositry at --> <https://hub.docker.com/repositories/usman547>
-- tag your local image with docker username and repositry name
-- `docker tag local-image-name usman547/repo-name` --> this will point the image using pointer
-- `docker push new-image-name-that-has-docker-username`
-
-# docker compose
-- It can be used to run multiple containers and can be set to which ports to expose
-- and can set environemnt variables. 
-- just run `docker compose up` in directory where we docker-compose.yml and do edit env variable in it.
-- every github codespace somes with docker daemon running so you can run `docker compose up` after editing evironment section
+# another way is to create docker image from Dockerfile and run a container
+- docker build -t name_image .
+- docker run -it -p 5000:5000 --env-file .env name_image
