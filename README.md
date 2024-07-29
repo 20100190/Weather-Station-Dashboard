@@ -61,3 +61,6 @@ Create and activate a virtual environment (Windows)
 # another way is to create docker image from Dockerfile and run a container
 - docker build -t name_image .
 - docker run -it -p 5000:5000 --env-file .env name_image
+
+# Using github or other codespace
+- codespace comes with running docker daemon so, you can do all of the above steps. Docker build, run, compose up after add .env file
