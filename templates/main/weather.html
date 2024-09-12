@@ -1,0 +1,32 @@
+{% extends 'base.html'%}
+
+
+{% block app_content %}
+    <div class="worksheet-container">
+    <h1>Weather Information</h1>
+    <table id="history-table" class="table worksheet">
+        <thead>
+            <tr>
+                <th class="green">City Name</th>
+                <th class="green">Time</th>
+                <th class="green">Temperature (°C)</th>
+                <th class="green">Feels Like</th>
+                <th class="green">Description</th>
+                <th class="green">Humidity (%)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for weather_data in all_data%}
+            <tr role="row">
+                <td>{{ weather_data.city }}</td>
+                <td>{{weather_data.timestamp}}</td>
+                <td>{{ weather_data.data.main.temp }}</td>
+                <td>{{ weather_data.data.main.feels_like }}</td>
+                <td>{{ weather_data.data.weather[0].description }}</td>
+                <td>{{ weather_data.data.main.humidity }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example Webpage Layout</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="stylesheet" href="static2/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="static/css/toastr.css">
+</head>
+<body>
+    <!-- Navbar  -->
+    <div id="navbar">
+        <a id="logo" href="https://github.com/20100190/Weather-Station-Dashboard" target="_blank"> Weather Check </a>
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="https://www.linkedin.com/in/usman174/" target="_blank">About</a>
+        <input placeholder="Google Search">
+        <button>search</button>
+    </div>
+
+    <div class="wrapper">
+        <nav id="sidebar">
+<!-- Side bar selection
+            <select id="current-company" class="form-select mb-2" name="current-company">
+                <option value="ABC" selected>ABC</option>
+                <option value="X">X</option>
+                <option value="Y">Y</option>
+                <option value="Z"></option>
+            </select>
+            <select id="filing-year" class="form-select mb-2" name="filing_year">
+                <option value="2021" selected>2021</option>
+                <option value="2020">2020</option>
+                <option value="2019">2019</option>
+                <option value="2018">2018</option>
+            </select>
+-->
+            <ul class="list-unstyled components">
+                <li><a href="{{ url_for('index') }}" class="{% if request.endpoint == 'index' %}active{% endif %}">1. Search Temperature</a></li>
+                <li><a href="{{ url_for('history') }}" class="{% if request.endpoint == 'history' %}active{% endif %}">2. Temperature History</a></li>
+            </ul>
+            <footer>
+                <p>Copyright © 2021 My Website</p>
+            </footer>
+        </nav>
+
+        <div id="primary-content">
+            
+            {% block app_content %} {% endblock%}
+
+
+        </div>
+    </div>
+
+</body>
+</html>

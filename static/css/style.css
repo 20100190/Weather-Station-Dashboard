@@ -1,0 +1,119 @@
+footer {
+    margin: 20px 20px 80px 20px;
+    padding: 10px;
+    text-align: center;
+    font-size: 0.6em;
+    color: #999;
+}
+
+
+#loadingIndicator {
+    display: none;
+}
+
+#navbar {
+    background-color: #0f1111;
+    height: 40px;
+    color: white;
+}
+
+#navbar a {
+    margin-right: 200px;
+}
+
+a,
+a:hover,
+a:focus {
+    color: #59B224;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+
+#navbar button {
+    background-color: #f0880f;
+}
+
+#logo {
+    color: #f0880f;
+    font-size: 20px;
+}
+
+
+/* ---------------------------------------------------
+    SIDEBAR STYLE
+----------------------------------------------------- */
+
+.wrapper {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+}
+
+/* ---------------------------------------------------
+    Sidebar
+----------------------------------------------------- */
+
+#sidebar {
+    min-width: 250px;
+    max-width: 250px;
+    background: #f4f4f4;
+    color: #999999;
+    transition: all 0.3s;
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    top: 0;
+    bottom: 0;
+}
+
+#sidebar a.active {
+    pointer-events: none;
+    background-color: #fff;
+    color: #59B224;
+}
+
+
+#sidebar ul.components {
+    padding: 10px 0px;
+}
+
+#sidebar ul li a {
+    padding: 4px;
+    font-size: 0.9em;
+    display: block;
+    color: #666666;
+}
+
+#sidebar ul li a:hover {
+    color: #333333;
+    background: #ffffff;
+}
+
+ul ul a {
+    font-size: 0.9em !important;
+    padding-left: 30px !important;
+}
+
+/* --------------------------------------------------- */
+
+#primary-content {
+    width: 100%;
+    padding: 20px 20px 200px 20px;
+    min-height: 100vh;
+    transition: all 0.3s;
+    height: 100vh;
+    overflow: scroll;
+    top: 0;
+    bottom: 0;
+}
+
+.worksheet thead th.green {
+    background: #d8f4c8 !important;
+}
+
+/* Primary button er define class from bootstrap */
+.btn-primary, .btn-primary:visited {
+    background-color: #59B224 !important;
+    border-color: #59B224 !important;
+}
